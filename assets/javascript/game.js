@@ -13,11 +13,13 @@ var comPhrase = phraseBank[rand];
 console.log(comPhrase);
 
 // Display to the user
-var displayPhrase = "";
+var displayPhraseArr = [];
 for (var i = 0; i < comPhrase.length; i++) {
-	displayPhrase = displayPhrase + "_";
+	displayPhraseArr.push("_");
 	console.log(comPhrase[i]);
+	console.log(displayPhraseArr.join(""));
 }
+var displayPhrase = displayPhraseArr.join("");
 
 // if (displayPhrase.length != comPhrase.length) {
 // 	console.log("phrases don't match");
@@ -26,18 +28,14 @@ for (var i = 0; i < comPhrase.length; i++) {
 document.getElementById("wordToGuess").textContent = displayPhrase;
 
 
-var currentDisplayPhrase = "";
+var currentDisplayPhrase = [];
 var userLetter = "t";
 
 for (var i = 0; i < comPhrase.length; i++) {
-	if (userLetter === comPhrase[i]) {
-		currentDisplayPhrase = currentDisplayPhrase + comPhrase[i];
-	}
-
-	else {
-		currentDisplayPhrase = currentDisplayPhrase + "_";
-	}
+ 	if (userLetter === comPhrase[i]) {
+		displayPhraseArr[i] = comPhrase[i];
+ 	}
 }
 
-console.log(currentDisplayPhrase);
-document.getElementById("wordToGuess").textContent = currentDisplayPhrase;
+displayPhrase = displayPhraseArr.join("");
+document.getElementById("wordToGuess").textContent = displayPhrase;
