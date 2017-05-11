@@ -46,6 +46,26 @@ document.onkeyup = function(event) {
  	guessesLeft--;
 
  	updateDisplay();
+
+ 	if (guessesLeft === -1) {
+ 		resetGame();
+ 	}
+}
+
+function resetGame () {
+	userGuesses = [];
+	guessesLeft = maxGuess;
+
+	rand = Math.floor((Math.random()*phraseBank.length));
+	comPhrase = phraseBank[rand];
+
+	displayPhraseArr = [];
+	for (var i = 0; i < comPhrase.length; i++) {
+		displayPhraseArr.push("_");
+		console.log(comPhrase[i]);
+		console.log(displayPhraseArr.join(""));
+	}
+	updateDisplay();
 }
 
 function updateDisplay () {
