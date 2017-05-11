@@ -1,21 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Hangman</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
+	<div class="page-header text-center">
+		<h1> Hangman Game </h1>
+	</div>
 
-	<h1 id="wordToGuess"></h1>
+	<div class="container text-center">
 
-	<p><span id="winNum"></span></p>
+		<div class="row">
 
-	<p> Guesses left: <span id="guessesLeft"></span></p>
+			<div class="col-md-2"></div>
 
-	<p> Guesses: <span id="userGuesses"></span></p>
+			<div class="col-md-4">
 
-	<h2 id="endStatus"></h2>
+				<h2 id="wordToGuess"></h2>
+
+				<p> Guesses left: <span id="guessesLeft"></span></p>
+
+				<p><span id="winNum"></span></p>
+
+			</div>
+
+			<div class="col-md-4">
+
+				<p> Guesses:</p>
+
+				<p><span id="userGuesses"></span></p>
+
+			</div>
+
+			<div class="col-md-2"></div>
+
+		</div>
+
+		<div class="row">
+
+			<h3 id="endStatus"></h3>
+
+		</div>
 
 	<script src="assets/javascript/game.js"></script>
 	

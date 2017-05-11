@@ -1,3 +1,14 @@
+div.col-md-4 {
+	margin-top: 100px;
+	border: 1px solid #cccccc;
+	height: 300px;
+}
+
+p {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
 #wordToGuess {
 	font-family: monospace;
 	letter-spacing: 10px;
