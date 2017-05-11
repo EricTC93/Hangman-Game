@@ -2,8 +2,8 @@
 var alphabet = "qwertyuiopasdfghjklzxcvbnm";
 
 var userGuesses = [];
-var guessesLeft = maxGuess;
 var maxGuess = 12;
+var guessesLeft = maxGuess;
 
 var phraseBank = ["test","testing"];
 
@@ -14,39 +14,28 @@ console.log(comPhrase);
 
 // Display to the user
 var displayPhraseArr = [];
-var displayPhrase = "";
+//var displayPhrase = "";
 for (var i = 0; i < comPhrase.length; i++) {
 	displayPhraseArr.push("_");
 	console.log(comPhrase[i]);
 	console.log(displayPhraseArr.join(""));
 }
-updateDisplayWord();
+updateDisplay();
 
 // if (displayPhrase.length != comPhrase.length) {
 // 	console.log("phrases don't match");
 // }
 
-document.getElementById("wordToGuess").textContent = displayPhrase;
-
-
-// var userLetter = "t";
-
-// for (var i = 0; i < comPhrase.length; i++) {
-//  	if (userLetter === comPhrase[i]) {
-// 		displayPhraseArr[i] = comPhrase[i];
-//  	}
-// }
-
-// updateDisplayWord();
+//document.getElementById("wordToGuess").textContent = displayPhrase;
 
 document.onkeyup = function(event) {
 	var userLetter = event.key;
 
-	userGuesses.push(userLetter);
-
 	if(alphabet.indexOf(userLetter) == -1) {
 		return;
 	}
+
+	userGuesses.push(userLetter);
 
 	for (var i = 0; i < comPhrase.length; i++) {
  		if (userLetter === comPhrase[i]) {
@@ -54,10 +43,16 @@ document.onkeyup = function(event) {
   		}
  	}
 
- 	updateDisplayWord();
+ 	guessesLeft--;
+
+ 	updateDisplay();
 }
 
-function updateDisplayWord () {
-	displayPhrase = displayPhraseArr.join("");
-	document.getElementById("wordToGuess").textContent = displayPhrase;
+function updateDisplay () {
+	//displayPhrase = displayPhraseArr.join("");
+	document.getElementById("wordToGuess").textContent = displayPhraseArr.join("");
+
+	document.getElementById("guessesLeft").textContent = guessesLeft;
+
+	document.getElementById("userGuesses").textContent = userGuesses.join(",");
 }
