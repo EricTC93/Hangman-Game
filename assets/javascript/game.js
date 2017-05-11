@@ -4,6 +4,7 @@ var alphabet = "qwertyuiopasdfghjklzxcvbnm";
 var userGuesses = [];
 var maxGuess = 12;
 var guessesLeft = maxGuess;
+var userLetter;
 
 var phraseBank = ["test","testing"];
 
@@ -22,17 +23,12 @@ for (var i = 0; i < comPhrase.length; i++) {
 }
 updateDisplay();
 
-// if (displayPhrase.length != comPhrase.length) {
-// 	console.log("phrases don't match");
-// }
-
-//document.getElementById("wordToGuess").textContent = displayPhrase;
 
 document.onkeyup = function(event) {
-	var userLetter = event.key;
+	userLetter = event.key;
 
 	if (guessesLeft >= 0) {
-		if(alphabet.indexOf(userLetter) == -1) {
+		if( alphabet.indexOf(userLetter) == -1 || repeatGuess() ) {
 			return;
 		}
 
@@ -92,4 +88,16 @@ function updateDisplay () {
 	document.getElementById("guessesLeft").textContent = guessesLeft;
 
 	document.getElementById("userGuesses").textContent = userGuesses.join(",");
+}
+
+function repeatGuess () {
+	console.log(userGuesses.length);
+	for(var i = 0; i < userGuesses.length; i++) {
+		if (userLetter === userGuesses[i]) {
+			console.log("true");
+			return true;
+		}
+	}
+	console.log("false");
+	return false;
 }
