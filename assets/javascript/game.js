@@ -31,25 +31,39 @@ updateDisplay();
 document.onkeyup = function(event) {
 	var userLetter = event.key;
 
-	if(alphabet.indexOf(userLetter) == -1) {
-		return;
-	}
+	if (guessesLeft >= 0) {
+		if(alphabet.indexOf(userLetter) == -1) {
+			return;
+		}
 
-	userGuesses.push(userLetter);
+		userGuesses.push(userLetter);
 
-	for (var i = 0; i < comPhrase.length; i++) {
- 		if (userLetter === comPhrase[i]) {
- 			displayPhraseArr[i] = comPhrase[i];
-  		}
+		for (var i = 0; i < comPhrase.length; i++) {
+	 		if (userLetter === comPhrase[i]) {
+	 			displayPhraseArr[i] = comPhrase[i];
+	  		}
+	 	}
+
+	 	guessesLeft--;
+	 	updateDisplay();
+
+	 	if (comPhrase === displayPhraseArr.join("")) {
+	 		//console.log("check");
+	 		document.getElementById("endStatus").textContent = "You Win";
+	 		guessesLeft = -1;
+	 	}
+
+	 	if (guessesLeft === 0) {
+ 			document.getElementById("endStatus").textContent = "You Lose";
+ 			guessesLeft = -1;
+ 		}
+
  	}
 
- 	guessesLeft--;
-
- 	updateDisplay();
-
- 	if (guessesLeft === -1) {
+ 	else if (guessesLeft === -1) {
  		resetGame();
  	}
+
 }
 
 function resetGame () {
@@ -65,6 +79,9 @@ function resetGame () {
 		console.log(comPhrase[i]);
 		console.log(displayPhraseArr.join(""));
 	}
+
+	document.getElementById("endStatus").textContent = "";
+
 	updateDisplay();
 }
 
