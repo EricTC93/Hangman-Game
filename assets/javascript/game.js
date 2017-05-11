@@ -20,7 +20,6 @@ for (var i = 0; i < comPhrase.length; i++) {
 	console.log(comPhrase[i]);
 	console.log(displayPhraseArr.join(""));
 }
-// var displayPhrase = displayPhraseArr.join("");
 updateDisplayWord();
 
 // if (displayPhrase.length != comPhrase.length) {
@@ -30,18 +29,33 @@ updateDisplayWord();
 document.getElementById("wordToGuess").textContent = displayPhrase;
 
 
-var currentDisplayPhrase = [];
-var userLetter = "t";
+// var userLetter = "t";
 
-for (var i = 0; i < comPhrase.length; i++) {
- 	if (userLetter === comPhrase[i]) {
-		displayPhraseArr[i] = comPhrase[i];
+// for (var i = 0; i < comPhrase.length; i++) {
+//  	if (userLetter === comPhrase[i]) {
+// 		displayPhraseArr[i] = comPhrase[i];
+//  	}
+// }
+
+// updateDisplayWord();
+
+document.onkeyup = function(event) {
+	var userLetter = event.key;
+
+	userGuesses.push(userLetter);
+
+	if(alphabet.indexOf(userLetter) == -1) {
+		return;
+	}
+
+	for (var i = 0; i < comPhrase.length; i++) {
+ 		if (userLetter === comPhrase[i]) {
+ 			displayPhraseArr[i] = comPhrase[i];
+  		}
  	}
-}
 
-// displayPhrase = displayPhraseArr.join("");
-// document.getElementById("wordToGuess").textContent = displayPhrase;
-updateDisplayWord();
+ 	updateDisplayWord();
+}
 
 function updateDisplayWord () {
 	displayPhrase = displayPhraseArr.join("");
