@@ -14,12 +14,14 @@ console.log(comPhrase);
 
 // Display to the user
 var displayPhraseArr = [];
+var displayPhrase = "";
 for (var i = 0; i < comPhrase.length; i++) {
 	displayPhraseArr.push("_");
 	console.log(comPhrase[i]);
 	console.log(displayPhraseArr.join(""));
 }
-var displayPhrase = displayPhraseArr.join("");
+// var displayPhrase = displayPhraseArr.join("");
+updateDisplayWord();
 
 // if (displayPhrase.length != comPhrase.length) {
 // 	console.log("phrases don't match");
@@ -37,5 +39,11 @@ for (var i = 0; i < comPhrase.length; i++) {
  	}
 }
 
-displayPhrase = displayPhraseArr.join("");
-document.getElementById("wordToGuess").textContent = displayPhrase;
+// displayPhrase = displayPhraseArr.join("");
+// document.getElementById("wordToGuess").textContent = displayPhrase;
+updateDisplayWord();
+
+function updateDisplayWord () {
+	displayPhrase = displayPhraseArr.join("");
+	document.getElementById("wordToGuess").textContent = displayPhrase;
+}
