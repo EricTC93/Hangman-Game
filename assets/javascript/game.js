@@ -8,21 +8,31 @@ var guessesLeft = maxGuess;
 var userLetter;
 var letterFound;
 
-var phraseBank = ["test","testing"];
+var phraseBank = ["test","abcdefghijklmnopqrstuvwxyz","space bar test#2"];
 
 // Generates random number to pick a phrase
-var rand = Math.floor((Math.random()*phraseBank.length));
-var comPhrase = phraseBank[rand];
-console.log(comPhrase);
+// var rand = Math.floor((Math.random()*phraseBank.length));
+// var comPhrase = phraseBank[rand];
+// console.log(comPhrase);
 
 // Display to the user
-var displayPhraseArr = [];
-for (var i = 0; i < comPhrase.length; i++) {
-	displayPhraseArr.push("_");
-	console.log(comPhrase[i]);
-	console.log(displayPhraseArr.join(""));
-}
-updateDisplay();
+// var displayPhraseArr = [];
+// for (var i = 0; i < comPhrase.length; i++) {
+
+// 	if( alphabet.indexOf(comPhrase[i]) == -1) {
+// 		displayPhraseArr.push(comPhrase[i]);
+// 	}
+
+// 	else {	
+// 		displayPhraseArr.push("_");
+// 	}
+		
+// 		console.log(comPhrase[i]);
+// 		console.log(displayPhraseArr.join(""));
+// }
+// updateDisplay();
+
+startGame();
 
 
 document.onkeyup = function(event) {
@@ -69,13 +79,13 @@ document.onkeyup = function(event) {
  	}
 
  	else if (guessesLeft === -1) {
- 		resetGame();
+ 		startGame();
  	}
 
 }
 
 // Resets Variables
-function resetGame () {
+function startGame () {
 	userGuesses = [];
 	guessesLeft = maxGuess;
 
@@ -84,7 +94,14 @@ function resetGame () {
 
 	displayPhraseArr = [];
 	for (var i = 0; i < comPhrase.length; i++) {
-		displayPhraseArr.push("_");
+		if( alphabet.indexOf(comPhrase[i]) == -1) {
+			displayPhraseArr.push(comPhrase[i]);
+		}
+
+		else {	
+			displayPhraseArr.push("_");
+		}
+		
 		console.log(comPhrase[i]);
 		console.log(displayPhraseArr.join(""));
 	}
