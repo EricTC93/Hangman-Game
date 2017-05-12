@@ -8,7 +8,7 @@ var guessesLeft = maxGuess;
 var userLetter;
 var letterFound;
 
-var phraseBank = ["test","abcdefghijklmnopqrstuvwxyz","space bar test#2"];
+var phraseBank = ["test","abcdefghijkl mnopqrstuvwxyz","space bar test#2"];
 
 // Generates random number to pick a phrase
 // var rand = Math.floor((Math.random()*phraseBank.length));
@@ -39,7 +39,7 @@ document.onkeyup = function(event) {
 	userLetter = event.key;
 
 	// The game is still going or just ended
-	if (guessesLeft >= 0) {
+	if (guessesLeft > 0) {
 
 		// Checks for valid input
 		if( alphabet.indexOf(userLetter) == -1 || repeatGuess() ) {
@@ -65,20 +65,14 @@ document.onkeyup = function(event) {
 
 	 	// You are sucessful
 	 	if (comPhrase === displayPhraseArr.join("")) {
-	 		document.getElementById("endStatus").textContent = "You Win";
-	 		guessesLeft = -1;
 	 		winNum++;
+	 		startGame();
 	 	}
-
-	 	// You ran out of tries
-	 	if (guessesLeft === 0) {
- 			document.getElementById("endStatus").textContent = "You Lose";
- 			guessesLeft = -1;
- 		}
 
  	}
 
- 	else if (guessesLeft === -1) {
+ 	// You ran out of tries
+	if (guessesLeft === 0) {
  		startGame();
  	}
 
@@ -106,8 +100,6 @@ function startGame () {
 		console.log(displayPhraseArr.join(""));
 	}
 
-	document.getElementById("endStatus").textContent = "";
-
 	// Displays Win count
 	if(winNum > 0){
 		document.getElementById("winNum").textContent = ("Wins: " + winNum);
@@ -123,7 +115,7 @@ function updateDisplay () {
 
 	document.getElementById("guessesLeft").textContent = guessesLeft;
 
-	document.getElementById("userGuesses").textContent = userGuesses.join(",");
+	document.getElementById("userGuesses").textContent = userGuesses.join(" ");
 }
 
 // Checks for repeat guesses
