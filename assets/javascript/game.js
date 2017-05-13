@@ -1,4 +1,5 @@
 // Declaring Variables
+
 var alphabet = "qwertyuiopasdfghjklzxcvbnm";
 alphabet = alphabet + "QWERTYUIOPASDFGHJKLZXCVBNM";
 var winNum = 0;
@@ -11,18 +12,33 @@ var letterFound;
 
 var phraseBank = [
 	"AJ Lee",
-	"Asuka", 
+	"AJ Styles",
+	"Asuka",
+	"Bayley",
+	"Becky Lynch",
+	"CM Punk",
+	"Eddie Guerrero",
+	"Jason Jordan & Chad Gable",
+	"John Cena",
+	"Johnny Gargano and Tommaso Ciampa", 
 	"Kevin Owens",
+	"Kofi, Big E & Xavier Woods",
+	"Kurt Angle",
 	"Lita",
-	"Matt and Jeff Hardy",
+	"Matt & Jeff Hardy",
 	"Naomi",
 	"Sami Zayn",
-	"Sasha Banks" 
+	"Sasha Banks", 
+	"Shinsuke Nakamura",
+	"The Miz",
 	];
 
 var comPhrase;
 
 var audio = new Audio("");
+
+// var tagetElm = document.getElementById("hintTitle");
+// tagetElm.classList.add("other");
 
 // Generates random number to pick a phrase
 // var rand = Math.floor((Math.random()*phraseBank.length));
@@ -45,6 +61,12 @@ var audio = new Audio("");
 // 		console.log(displayPhraseArr.join(""));
 // }
 // updateDisplay();
+
+var img = document.getElementById("logo");
+img.src = "assets/images/WWELogo.png";
+
+var img2 = document.getElementById("logo2");
+img2.src = "assets/images/WWELogo2.gif";
 
 startGame();
 
@@ -101,10 +123,11 @@ function startGame () {
 	if( newComPhrase != comPhrase ) {
 
 		comPhrase = newComPhrase;
+		// comPhrase = phraseBank[18];
 		userGuesses = [];
 		guessesLeft = maxGuess;
 
-		playAudio(comPhrase);
+		playAudioHint(comPhrase);
 
 		displayPhraseArr = [];
 		for (var i = 0; i < comPhrase.length; i++) {
@@ -156,7 +179,7 @@ function repeatGuess () {
 	return false;
 }
 
-function playAudio (phr) {
+function playAudioHint (phr) {
 
 	var hintTitle;
 	audio.pause();
@@ -167,9 +190,57 @@ function playAudio (phr) {
 		audio.play();
 	}
 
+	else if (phr === "AJ Styles") {
+		hintTitle = "Phenomenal"
+		audio = new Audio("assets/audio/Phenomenal.mp3");
+		audio.play();
+	}
+
 	else if (phr === "Asuka") {
 		hintTitle = "The Future"
 		audio = new Audio("assets/audio/The_Future.mp3");
+		audio.play();
+	}
+
+	else if (phr === "Bayley") {
+		hintTitle = "Turn it Up"
+		audio = new Audio("assets/audio/Turn_it_Up.mp3");
+		audio.play();
+	}
+
+	else if (phr === "Becky Lynch") {
+		hintTitle = "Celtic Invasion"
+		audio = new Audio("assets/audio/Celtic_Invasion.mp3");
+		audio.play();
+	}
+
+	else if (phr === "CM Punk") {
+		hintTitle = "Cult of Personality"
+		audio = new Audio("assets/audio/Cult_of_Personality.mp3");
+		audio.play();
+	}
+
+	else if (phr === "Eddie Guerrero") {
+		hintTitle = "Lie, Cheat & Steal"
+		audio = new Audio("assets/audio/Lie_Cheat_Steal.mp3");
+		audio.play();
+	}
+
+	else if (phr === "Jason Jordan & Chad Gable") {
+		hintTitle = "Elite"
+		audio = new Audio("assets/audio/Elite.mp3");
+		audio.play();
+	}
+
+	else if (phr === "John Cena") {
+		hintTitle = "The Time is Now"
+		audio = new Audio("assets/audio/The_Time_is_Now.mp3");
+		audio.play();
+	}
+
+	else if (phr === "Johnny Gargano and Tommaso Ciampa") {
+		hintTitle = "Chrome Hearts"
+		audio = new Audio("assets/audio/Chrome_Hearts.mp3");
 		audio.play();
 	}
 
@@ -179,21 +250,27 @@ function playAudio (phr) {
 		audio.play();
 	}
 
+	else if (phr === "Kofi, Big E & Xavier Woods") {
+		hintTitle = "New Way"
+		audio = new Audio("assets/audio/New_Way.mp3");
+		audio.play();
+	}
+
+	else if (phr === "Kurt Angle") {
+		hintTitle = "Medal"
+		audio = new Audio("assets/audio/Medal.mp3");
+		audio.play();
+	}
+
 	else if (phr === "Lita") {
 		hintTitle = "LoveFuryPassionEnergy"
 		audio = new Audio("assets/audio/LoveFuryPassionEnergy.mp3");
 		audio.play();
 	}
 
-	else if (phr === "Matt and Jeff Hardy") {
+	else if (phr === "Matt & Jeff Hardy") {
 		hintTitle = "Loaded"
 		audio = new Audio("assets/audio/Loaded.mp3");
-		audio.play();
-	}
-
-	else if (phr === "Sami Zayn") {
-		hintTitle = "Worlds Apart"
-		audio = new Audio("assets/audio/Worlds_Apart.m4a");
 		audio.play();
 	}
 
@@ -203,9 +280,27 @@ function playAudio (phr) {
 		audio.play();
 	}
 
+	else if (phr === "Sami Zayn") {
+		hintTitle = "Worlds Apart"
+		audio = new Audio("assets/audio/Worlds_Apart.m4a");
+		audio.play();
+	}
+
 	else if (phr === "Sasha Banks") {
 		hintTitle = "Sky's the Limit"
 		audio = new Audio("assets/audio/Sky's_the_Limit.m4a");
+		audio.play();
+	}
+
+	else if (phr === "Shinsuke Nakamura") {
+		hintTitle = "Rising Sun"
+		audio = new Audio("assets/audio/Rising_Sun.mp3");
+		audio.play();
+	}
+
+	else if (phr === "The Miz") {
+		hintTitle = "I Came to Play"
+		audio = new Audio("assets/audio/I_Came_to_Play.mp3");
 		audio.play();
 	}
 
