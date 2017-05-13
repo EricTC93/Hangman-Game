@@ -8,7 +8,11 @@ var guessesLeft = maxGuess;
 var userLetter;
 var letterFound;
 
-var phraseBank = ["test","abcdefghijkl mnopqrstuvwxyz","space bar test#2"];
+var phraseBank = ["test","asuka","space bar test#2"];
+
+var audio = new Audio("");
+
+
 
 // Generates random number to pick a phrase
 // var rand = Math.floor((Math.random()*phraseBank.length));
@@ -85,6 +89,7 @@ function startGame () {
 
 	rand = Math.floor((Math.random()*phraseBank.length));
 	comPhrase = phraseBank[rand];
+	playAudio(comPhrase);
 
 	displayPhraseArr = [];
 	for (var i = 0; i < comPhrase.length; i++) {
@@ -129,4 +134,17 @@ function repeatGuess () {
 	}
 	console.log("false");
 	return false;
+}
+
+function playAudio (phr) {
+	if (phr === "asuka") {
+		audio = new Audio("assets/audio/The_Future.mp3");
+		audio.play();
+	}
+
+	else {
+		audio.pause();
+	}
+
+	audio.loop = true;
 }
