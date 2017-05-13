@@ -1,5 +1,8 @@
 // Declaring Variables
 
+var themes = ["WWE","SSB64"]
+var currentTheme = themes[0];
+
 var alphabet = "qwertyuiopasdfghjklzxcvbnm";
 alphabet = alphabet + "QWERTYUIOPASDFGHJKLZXCVBNM";
 var winNum = 0;
@@ -20,7 +23,7 @@ var phraseBank = [
 	"Eddie Guerrero",
 	"Jason Jordan & Chad Gable",
 	"John Cena",
-	"Johnny Gargano and Tommaso Ciampa", 
+	"Johnny Gargano & Tommaso Ciampa", 
 	"Kevin Owens",
 	"Kofi, Big E & Xavier Woods",
 	"Kurt Angle",
@@ -31,6 +34,21 @@ var phraseBank = [
 	"Sasha Banks", 
 	"Shinsuke Nakamura",
 	"The Miz",
+	];
+
+var phraseBank1 = [
+	"Captin Falcon",
+	"Donkey Kong",
+	"Fox",
+	"Jigglypuff",
+	"Kirby",
+	"Link",
+	"Luigi",
+	"Mario",
+	"Ness",
+	"Pikachu",
+	"Samus",
+	"Yoshi"
 	];
 
 var comPhrase;
@@ -62,13 +80,7 @@ var audio = new Audio("");
 // }
 // updateDisplay();
 
-var img = document.getElementById("logo");
-img.src = "assets/images/WWELogo.png";
-
-var img2 = document.getElementById("logo2");
-img2.src = "assets/images/WWELogo2.gif";
-
-startGame();
+startGame(currentTheme);
 
 
 document.onkeyup = function(event) {
@@ -102,23 +114,45 @@ document.onkeyup = function(event) {
 	 	// You are sucessful
 	 	if (comPhrase === displayPhraseArr.join("")) {
 	 		winNum++;
-	 		startGame();
+	 		if (currentTheme === "SSB64") {
+	 			playSuccessAudio (comPhrase);
+	 		}
+	 		startGame(currentTheme);
 	 	}
 
  	}
 
  	// You ran out of tries
 	if (guessesLeft === 0) {
- 		startGame();
+ 		startGame(currentTheme);
  	}
 
 }
 
 // Resets Variables
-function startGame () {
+function startGame (thm) {
 
-	rand = Math.floor((Math.random()*phraseBank.length));
-	var newComPhrase = phraseBank[rand];
+	if (thm === "WWE") {
+		var img = document.getElementById("logo");
+		img.src = "assets/images/WWELogo.png";
+
+		var img2 = document.getElementById("logo2");
+		img2.src = "assets/images/WWELogo2.gif";
+
+		rand = Math.floor((Math.random()*phraseBank.length));
+		var newComPhrase = phraseBank[rand];
+	}
+
+	else if (thm === "SSB64") {
+		var img = document.getElementById("logo");
+		img.src = "assets/images/smash64Logo.png";
+
+		var img2 = document.getElementById("logo2");
+		img2.src = "assets/images/N64Logo.gif";
+
+		rand = Math.floor((Math.random()*phraseBank1.length));
+		var newComPhrase = phraseBank1[rand];
+	}
 
 	if( newComPhrase != comPhrase ) {
 
@@ -127,7 +161,13 @@ function startGame () {
 		userGuesses = [];
 		guessesLeft = maxGuess;
 
-		playAudioHint(comPhrase);
+		if (thm === "WWE"){
+			playAudioHint(comPhrase);
+		}
+
+		else if (thm === "SSB64") {
+			document.getElementById("hintTitle").textContent = "";
+		}
 
 		displayPhraseArr = [];
 		for (var i = 0; i < comPhrase.length; i++) {
@@ -152,7 +192,7 @@ function startGame () {
 	}
 
 	else {
-		startGame();
+		startGame(currentTheme);
 	}
 }
 
@@ -238,7 +278,7 @@ function playAudioHint (phr) {
 		audio.play();
 	}
 
-	else if (phr === "Johnny Gargano and Tommaso Ciampa") {
+	else if (phr === "Johnny Gargano & Tommaso Ciampa") {
 		hintTitle = "Chrome Hearts"
 		audio = new Audio("assets/audio/Chrome_Hearts.mp3");
 		audio.play();
@@ -306,4 +346,19 @@ function playAudioHint (phr) {
 
 	audio.loop = true;
 	document.getElementById("hintTitle").textContent = hintTitle;
+}
+
+function playSuccessAudio (phr) {
+	audio.pause();
+
+	if( phr === "Luigi" || phr === "Mario" ) {
+		audio = new Audio("assets/audio/marioWin.mp3");
+		audio.play();
+	}
+
+	audio.loop = false;
+}
+
+function themeSwitch (index) {
+	
 }
