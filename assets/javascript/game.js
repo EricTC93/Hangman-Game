@@ -9,12 +9,10 @@ var guessesLeft = maxGuess;
 var userLetter;
 var letterFound;
 
-var phraseBank = ["Asuka", "Sasha Banks", "space bar test#2", "test"];
+var phraseBank = ["Aj Lee", "Asuka", "Lita", "Sasha Banks", "space bar test#2"];
 var comPhrase;
 
 var audio = new Audio("");
-
-
 
 // Generates random number to pick a phrase
 // var rand = Math.floor((Math.random()*phraseBank.length));
@@ -152,8 +150,18 @@ function playAudio (phr) {
 
 	audio.pause();
 
-	if (phr === "Asuka") {
+	if (phr === "Aj Lee") {
+		audio = new Audio("assets/audio/Let's_Light_It_Up.mp3");
+		audio.play();
+	}
+
+	else if (phr === "Asuka") {
 		audio = new Audio("assets/audio/The_Future.mp3");
+		audio.play();
+	}
+
+	else if (phr === "Lita") {
+		audio = new Audio("assets/audio/LoveFuryPassionEnergy.mp3");
 		audio.play();
 	}
 

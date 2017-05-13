@@ -1,6 +1,19 @@
+body {
+	color: white;
+	background-color: black;
+}
+
+h1 {
+	font-size: 50px;
+	background: -webkit-linear-gradient(white, gray);
+  	-webkit-background-clip: text;
+  	-webkit-text-fill-color: transparent;
+}
+
 div.col-md-5 {
 	margin-top: 100px;
-	border: 1px solid #cccccc;
+	border: 3px solid red;
+	border-style: dotted;
 	height: 300px;
 }
 
