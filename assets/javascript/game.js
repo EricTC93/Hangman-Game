@@ -9,7 +9,8 @@ var guessesLeft = maxGuess;
 var userLetter;
 var letterFound;
 
-var phraseBank = ["test","Asuka","space bar test#2"];
+var phraseBank = ["Asuka", "Sasha Banks", "space bar test#2", "test"];
+var comPhrase;
 
 var audio = new Audio("");
 
@@ -85,33 +86,43 @@ document.onkeyup = function(event) {
 
 // Resets Variables
 function startGame () {
-	userGuesses = [];
-	guessesLeft = maxGuess;
 
 	rand = Math.floor((Math.random()*phraseBank.length));
-	comPhrase = phraseBank[rand];
-	playAudio(comPhrase);
+	var newComPhrase = phraseBank[rand];
 
-	displayPhraseArr = [];
-	for (var i = 0; i < comPhrase.length; i++) {
-		if( alphabet.indexOf(comPhrase[i]) == -1 ) {
-			displayPhraseArr.push(comPhrase[i]);
+	if( newComPhrase != comPhrase ) {
+
+		comPhrase = newComPhrase;
+		userGuesses = [];
+		guessesLeft = maxGuess;
+
+		playAudio(comPhrase);
+
+		displayPhraseArr = [];
+		for (var i = 0; i < comPhrase.length; i++) {
+			if( alphabet.indexOf(comPhrase[i]) == -1 ) {
+				displayPhraseArr.push(comPhrase[i]);
+			}
+
+			else {	
+				displayPhraseArr.push("_");
+			}
+			
+			console.log(comPhrase[i]);
+			console.log(displayPhraseArr.join(""));
 		}
 
-		else {	
-			displayPhraseArr.push("_");
+		// Displays Win count
+		if(winNum > 0){
+			document.getElementById("winNum").textContent = ("Wins: " + winNum);
 		}
-		
-		console.log(comPhrase[i]);
-		console.log(displayPhraseArr.join(""));
+
+		updateDisplay();
 	}
 
-	// Displays Win count
-	if(winNum > 0){
-		document.getElementById("winNum").textContent = ("Wins: " + winNum);
+	else {
+		startGame();
 	}
-
-	updateDisplay();
 }
 
 // Updates the display
@@ -138,13 +149,17 @@ function repeatGuess () {
 }
 
 function playAudio (phr) {
+
+	audio.pause();
+
 	if (phr === "Asuka") {
 		audio = new Audio("assets/audio/The_Future.mp3");
 		audio.play();
 	}
 
-	else {
-		audio.pause();
+	else if (phr === "Sasha Banks") {
+		audio = new Audio("assets/audio/Sky's_the_Limit.m4a");
+		audio.play();
 	}
 
 	audio.loop = true;
