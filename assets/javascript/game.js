@@ -1,5 +1,6 @@
 // Declaring Variables
 var alphabet = "qwertyuiopasdfghjklzxcvbnm";
+alphabet = alphabet + "QWERTYUIOPASDFGHJKLZXCVBNM";
 var winNum = 0;
 
 var userGuesses = [];
@@ -8,7 +9,7 @@ var guessesLeft = maxGuess;
 var userLetter;
 var letterFound;
 
-var phraseBank = ["test","asuka","space bar test#2"];
+var phraseBank = ["test","Asuka","space bar test#2"];
 
 var audio = new Audio("");
 
@@ -54,7 +55,7 @@ document.onkeyup = function(event) {
 		letterFound = false;
 
 		for (var i = 0; i < comPhrase.length; i++) {
-	 		if (userLetter === comPhrase[i]) {
+	 		if (userLetter === comPhrase[i] || userLetter.toUpperCase() === comPhrase[i]) {
 	 			displayPhraseArr[i] = comPhrase[i];
 	 			letterFound = true;
 	  		}
@@ -93,7 +94,7 @@ function startGame () {
 
 	displayPhraseArr = [];
 	for (var i = 0; i < comPhrase.length; i++) {
-		if( alphabet.indexOf(comPhrase[i]) == -1) {
+		if( alphabet.indexOf(comPhrase[i]) == -1 ) {
 			displayPhraseArr.push(comPhrase[i]);
 		}
 
@@ -137,7 +138,7 @@ function repeatGuess () {
 }
 
 function playAudio (phr) {
-	if (phr === "asuka") {
+	if (phr === "Asuka") {
 		audio = new Audio("assets/audio/The_Future.mp3");
 		audio.play();
 	}
