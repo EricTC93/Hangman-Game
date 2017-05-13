@@ -9,7 +9,17 @@ var guessesLeft = maxGuess;
 var userLetter;
 var letterFound;
 
-var phraseBank = ["Aj Lee", "Asuka", "Lita", "Sasha Banks", "space bar test#2"];
+var phraseBank = [
+	"AJ Lee",
+	"Asuka", 
+	"Kevin Owens",
+	"Lita",
+	"Matt and Jeff Hardy",
+	"Naomi",
+	"Sami Zayn",
+	"Sasha Banks" 
+	];
+
 var comPhrase;
 
 var audio = new Audio("");
@@ -148,27 +158,57 @@ function repeatGuess () {
 
 function playAudio (phr) {
 
+	var hintTitle;
 	audio.pause();
 
-	if (phr === "Aj Lee") {
+	if (phr === "AJ Lee") {
+		hintTitle = "Let's Light It Up"
 		audio = new Audio("assets/audio/Let's_Light_It_Up.mp3");
 		audio.play();
 	}
 
 	else if (phr === "Asuka") {
+		hintTitle = "The Future"
 		audio = new Audio("assets/audio/The_Future.mp3");
 		audio.play();
 	}
 
+	else if (phr === "Kevin Owens") {
+		hintTitle = "Fight"
+		audio = new Audio("assets/audio/Fight.m4a");
+		audio.play();
+	}
+
 	else if (phr === "Lita") {
+		hintTitle = "LoveFuryPassionEnergy"
 		audio = new Audio("assets/audio/LoveFuryPassionEnergy.mp3");
 		audio.play();
 	}
 
+	else if (phr === "Matt and Jeff Hardy") {
+		hintTitle = "Loaded"
+		audio = new Audio("assets/audio/Loaded.mp3");
+		audio.play();
+	}
+
+	else if (phr === "Sami Zayn") {
+		hintTitle = "Worlds Apart"
+		audio = new Audio("assets/audio/Worlds_Apart.m4a");
+		audio.play();
+	}
+
+	else if (phr === "Naomi") {
+		hintTitle = "Amazing"
+		audio = new Audio("assets/audio/Amazing_Remix.mp3");
+		audio.play();
+	}
+
 	else if (phr === "Sasha Banks") {
+		hintTitle = "Sky's the Limit"
 		audio = new Audio("assets/audio/Sky's_the_Limit.m4a");
 		audio.play();
 	}
 
 	audio.loop = true;
+	document.getElementById("hintTitle").textContent = hintTitle;
 }
