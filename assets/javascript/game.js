@@ -36,7 +36,7 @@ var phraseBank = [
 	"The Miz",
 	];
 
-var phraseBank1 = [
+/*var phraseBank1 = [
 	"Captin Falcon",
 	"Donkey Kong",
 	"Fox",
@@ -45,11 +45,51 @@ var phraseBank1 = [
 	"Link",
 	"Luigi",
 	"Mario",
+	"Mushroom Kingdom",
 	"Ness",
+	"Peach's Castle",
 	"Pikachu",
 	"Samus",
 	"Yoshi"
+	];*/
+
+var phraseBank1 = [
+	"Luigi",
+	"Mario",
+	"Mushroom Kingdom",
+	"Peach's Castle",
+
+	"Congo Jungle",
+	"Donkey Kong",
+
+	"Hyrule Castle",
+	"Link",
+
+	"Planet Zebas",
+	"Samus",
+
+	"Mute City",
+	"Captin Falcon",
+
+	"Ness",
+	"Onet",
+
+	"Yoshi",
+	"Yoshi's Island",
+
+	"Dreamland",
+	"Kirby",
+
+	"Fox",
+	"Sector Z",
+
+	"Jigglypuff",
+	"Pikachu",
+	"Saffron City"	
 	];
+
+
+
 
 var comPhrase;
 
@@ -82,9 +122,16 @@ var audio = new Audio("");
 
 startGame(currentTheme);
 
-
 document.onkeyup = function(event) {
 	userLetter = event.key;
+
+	if (userLetter === "0" && currentTheme != "WWE") {
+		themeSwitch(0);
+	}
+
+	else if (userLetter === "1" && currentTheme != "SSB64") {
+		themeSwitch(1);
+	}
 
 	// The game is still going or just ended
 	if (guessesLeft > 0) {
@@ -356,9 +403,56 @@ function playSuccessAudio (phr) {
 		audio.play();
 	}
 
+	else if( phr === "Donkey Kong" ) {
+		audio = new Audio("assets/audio/dkWin.mp3");
+		audio.play();
+	}
+
+	else if( phr === "Link" ) {
+		audio = new Audio("assets/audio/linkWin.mp3");
+		audio.play();
+	}
+
+	else if( phr === "Samus" ) {
+		audio = new Audio("assets/audio/samusWin.mp3");
+		audio.play();
+	}
+
+	else if( phr === "Captin Falcon" ) {
+		audio = new Audio("assets/audio/captinFalconWin.mp3");
+		audio.play();
+	}
+
+	else if( phr === "Ness" ) {
+		audio = new Audio("assets/audio/nessWin.mp3");
+		audio.play();
+	}
+
+	else if( phr === "Yoshi" ) {
+		audio = new Audio("assets/audio/yoshiWin.mp3");
+		audio.play();
+	}
+
+	else if( phr === "Kirby" ) {
+		audio = new Audio("assets/audio/kirbyWin.mp3");
+		audio.play();
+	}
+
+	else if( phr === "Fox" ) {
+		audio = new Audio("assets/audio/foxWin.mp3");
+		audio.play();
+	}
+
+	else if( phr === "Pikachu" || phr === "Jigglypuff" ) {
+		audio = new Audio("assets/audio/pokemonWin.mp3");
+		audio.play();
+	}
+
 	audio.loop = false;
 }
 
 function themeSwitch (index) {
-	
+	audio.pause();
+	currentTheme = themes[index];
+	startGame(currentTheme);
 }
