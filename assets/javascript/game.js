@@ -1,5 +1,4 @@
 // Declaring Variables
-
 var themes = ["WWE","SSB64"]
 var currentTheme = themes[0];
 
@@ -13,13 +12,19 @@ var guessesLeft = maxGuess;
 var userLetter;
 var letterFound;
 
-var phraseBank = [
+var comPhrase;
+var audio = new Audio("");
+
+var phraseBank0 = [
 	"AJ Lee",
 	"AJ Styles",
 	"Asuka",
 	"Bayley",
 	"Becky Lynch",
 	"CM Punk",
+	"Daniel Bryan",
+	"Dean Ambrose",
+	"Dwayne 'The Rock' Johnson",
 	"Eddie Guerrero",
 	"Jason Jordan & Chad Gable",
 	"John Cena",
@@ -36,23 +41,6 @@ var phraseBank = [
 	"The Miz",
 	];
 
-/*var phraseBank1 = [
-	"Captin Falcon",
-	"Donkey Kong",
-	"Fox",
-	"Jigglypuff",
-	"Kirby",
-	"Link",
-	"Luigi",
-	"Mario",
-	"Mushroom Kingdom",
-	"Ness",
-	"Peach's Castle",
-	"Pikachu",
-	"Samus",
-	"Yoshi"
-	];*/
-
 var phraseBank1 = [
 	"Luigi",
 	"Mario",
@@ -65,19 +53,19 @@ var phraseBank1 = [
 	"Hyrule Castle",
 	"Link",
 
-	"Planet Zebas",
+	"Planet Zebes",
 	"Samus",
 
+	"Captain Falcon",
 	"Mute City",
-	"Captin Falcon",
 
 	"Ness",
-	"Onet",
+	"Onett",
 
 	"Yoshi",
 	"Yoshi's Island",
 
-	"Dreamland",
+	"Dream Land",
 	"Kirby",
 
 	"Fox",
@@ -88,43 +76,15 @@ var phraseBank1 = [
 	"Saffron City"	
 	];
 
-
-
-
-var comPhrase;
-
-var audio = new Audio("");
-
-// var tagetElm = document.getElementById("hintTitle");
-// tagetElm.classList.add("other");
-
-// Generates random number to pick a phrase
-// var rand = Math.floor((Math.random()*phraseBank.length));
-// var comPhrase = phraseBank[rand];
-// console.log(comPhrase);
-
-// Display to the user
-// var displayPhraseArr = [];
-// for (var i = 0; i < comPhrase.length; i++) {
-
-// 	if( alphabet.indexOf(comPhrase[i]) == -1) {
-// 		displayPhraseArr.push(comPhrase[i]);
-// 	}
-
-// 	else {	
-// 		displayPhraseArr.push("_");
-// 	}
-		
-// 		console.log(comPhrase[i]);
-// 		console.log(displayPhraseArr.join(""));
-// }
-// updateDisplay();
-
 startGame(currentTheme);
 
+
+
 document.onkeyup = function(event) {
+
 	userLetter = event.key;
 
+	// Changes theme
 	if (userLetter === "0" && currentTheme != "WWE") {
 		themeSwitch(0);
 	}
@@ -186,8 +146,8 @@ function startGame (thm) {
 		var img2 = document.getElementById("logo2");
 		img2.src = "assets/images/WWELogo2.gif";
 
-		rand = Math.floor((Math.random()*phraseBank.length));
-		var newComPhrase = phraseBank[rand];
+		rand = Math.floor((Math.random()*phraseBank0.length));
+		var newComPhrase = phraseBank0[rand];
 	}
 
 	else if (thm === "SSB64") {
@@ -201,10 +161,10 @@ function startGame (thm) {
 		var newComPhrase = phraseBank1[rand];
 	}
 
+	// Checks for repeat phrases
 	if( newComPhrase != comPhrase ) {
 
 		comPhrase = newComPhrase;
-		// comPhrase = phraseBank[18];
 		userGuesses = [];
 		guessesLeft = maxGuess;
 
@@ -216,6 +176,7 @@ function startGame (thm) {
 			document.getElementById("hintTitle").textContent = "";
 		}
 
+		// Creates starting display for user
 		displayPhraseArr = [];
 		for (var i = 0; i < comPhrase.length; i++) {
 			if( alphabet.indexOf(comPhrase[i]) == -1 ) {
@@ -225,14 +186,15 @@ function startGame (thm) {
 			else {	
 				displayPhraseArr.push("_");
 			}
-			
-			console.log(comPhrase[i]);
-			console.log(displayPhraseArr.join(""));
 		}
 
 		// Displays Win count
 		if(winNum > 0){
 			document.getElementById("winNum").textContent = ("Wins: " + winNum);
+		}
+
+		else {
+			document.getElementById("winNum").textContent = ("");
 		}
 
 		updateDisplay();
@@ -255,17 +217,16 @@ function updateDisplay () {
 
 // Checks for repeat guesses
 function repeatGuess () {
-	console.log(userGuesses.length);
 	for(var i = 0; i < userGuesses.length; i++) {
 		if (userLetter === userGuesses[i]) {
-			console.log("true");
 			return true;
 		}
 	}
-	console.log("false");
+
 	return false;
 }
 
+// Plays Audio depending on phrase
 function playAudioHint (phr) {
 
 	var hintTitle;
@@ -304,6 +265,24 @@ function playAudioHint (phr) {
 	else if (phr === "CM Punk") {
 		hintTitle = "Cult of Personality"
 		audio = new Audio("assets/audio/Cult_of_Personality.mp3");
+		audio.play();
+	}
+
+	else if (phr === "Daniel Bryan") {
+		hintTitle = "Flight of the Valkyries"
+		audio = new Audio("assets/audio/Flight_of_the_Valkyries.mp3");
+		audio.play();
+	}
+
+	else if (phr === "Dean Ambrose") {
+		hintTitle = "Retaliation"
+		audio = new Audio("assets/audio/Retaliation.mp3");
+		audio.play();
+	}
+
+	else if (phr === "Dwayne 'The Rock' Johnson") {
+		hintTitle = "Electrifying"
+		audio = new Audio("assets/audio/Electrifying.mp3");
 		audio.play();
 	}
 
@@ -398,52 +377,52 @@ function playAudioHint (phr) {
 function playSuccessAudio (phr) {
 	audio.pause();
 
-	if( phr === "Luigi" || phr === "Mario" ) {
+	if( phr === "Luigi" || phr === "Mario" || phr === "Mushroom Kingdom" || phr === "Peach's Castle") {
 		audio = new Audio("assets/audio/marioWin.mp3");
 		audio.play();
 	}
 
-	else if( phr === "Donkey Kong" ) {
+	else if( phr === "Congo Jungle" || phr === "Donkey Kong" ) {
 		audio = new Audio("assets/audio/dkWin.mp3");
 		audio.play();
 	}
 
-	else if( phr === "Link" ) {
+	else if( phr === "Hyrule Castle" || phr === "Link" ) {
 		audio = new Audio("assets/audio/linkWin.mp3");
 		audio.play();
 	}
 
-	else if( phr === "Samus" ) {
+	else if( phr === "Planet Zebes" || phr === "Samus" ) {
 		audio = new Audio("assets/audio/samusWin.mp3");
 		audio.play();
 	}
 
-	else if( phr === "Captin Falcon" ) {
-		audio = new Audio("assets/audio/captinFalconWin.mp3");
+	else if( phr === "Captain Falcon" || phr === "Mute City" ) {
+		audio = new Audio("assets/audio/captainFalconWin.mp3");
 		audio.play();
 	}
 
-	else if( phr === "Ness" ) {
+	else if( phr === "Ness" || phr === "Onett" ) {
 		audio = new Audio("assets/audio/nessWin.mp3");
 		audio.play();
 	}
 
-	else if( phr === "Yoshi" ) {
+	else if( phr === "Yoshi" || phr === "Yoshi's Island" ) {
 		audio = new Audio("assets/audio/yoshiWin.mp3");
 		audio.play();
 	}
 
-	else if( phr === "Kirby" ) {
+	else if( phr === "Dream Land" || phr === "Kirby" ) {
 		audio = new Audio("assets/audio/kirbyWin.mp3");
 		audio.play();
 	}
 
-	else if( phr === "Fox" ) {
+	else if( phr === "Fox" || phr === "Sector Z" ) {
 		audio = new Audio("assets/audio/foxWin.mp3");
 		audio.play();
 	}
 
-	else if( phr === "Pikachu" || phr === "Jigglypuff" ) {
+	else if( phr === "Pikachu" || phr === "Jigglypuff" || phr === "Saffron City" ) {
 		audio = new Audio("assets/audio/pokemonWin.mp3");
 		audio.play();
 	}
@@ -451,8 +430,13 @@ function playSuccessAudio (phr) {
 	audio.loop = false;
 }
 
+// Switches theme
 function themeSwitch (index) {
+	var targetElm = document.body;
+	targetElm.className = themes[index];
+
 	audio.pause();
+	winNum = 0;
 	currentTheme = themes[index];
 	startGame(currentTheme);
 }

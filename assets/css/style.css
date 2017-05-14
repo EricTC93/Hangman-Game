@@ -1,6 +1,11 @@
-body {
+body.WWE {
 	color: white;
 	background-color: black;
+}
+
+body.SSB64 {
+	color: black;
+	background-color: #66ffff;
 }
 
 h1 {
@@ -10,19 +15,33 @@ h1 {
   	-webkit-text-fill-color: transparent;
 }
 
+h2 {
+	font-size: 40px;
+}
+
 div.col-md-5 {
 	margin-top: 30px;
+	margin-bottom: 50px;
 	border: 3px solid red;
 	border-style: dotted;
 	height: 300px;
 }
 
 p {
-	padding-top: 20px;
-	padding-bottom: 20px;
+	font-size: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 
 #wordToGuess {
+	font-size: 30px;
 	font-family: monospace;
 	letter-spacing: 10px;
+	margin-bottom: 30px;
+}
+
+#userGuesses {
+	font-size: 25px;
+	font-style: italic;
+	letter-spacing: 5px;
 }
