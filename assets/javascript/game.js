@@ -336,7 +336,7 @@ function playAudioHint (phr) {
 
 	else if (phr === "Matt & Jeff Hardy") {
 		hintTitle = "Loaded"
-		audio = new Audio("assets/audio/Loaded.MP3");
+		audio = new Audio("assets/audio/Loaded.mp3");
 		audio.play();
 	}
 
