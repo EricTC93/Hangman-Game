@@ -147,7 +147,7 @@ function startGame (thm) {
 		img2.src = "assets/images/WWELogo2.gif";
 
 		rand = Math.floor((Math.random()*phraseBank0.length));
-		var newComPhrase = phraseBank0[rand];
+		var newComPhrase = phraseBank0[17];
 	}
 
 	else if (thm === "SSB64") {
@@ -336,7 +336,7 @@ function playAudioHint (phr) {
 
 	else if (phr === "Matt & Jeff Hardy") {
 		hintTitle = "Loaded"
-		audio = new Audio("assets/audio/Loaded.mp3");
+		audio = new Audio("assets/audio/Loaded.MP3");
 		audio.play();
 	}
 
