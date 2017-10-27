@@ -7,77 +7,287 @@ alphabet = alphabet + "QWERTYUIOPASDFGHJKLZXCVBNM";
 var winNum = 0;
 
 var userGuesses = [];
-var maxGuess = 12;
-var guessesLeft = maxGuess;
+
+var guessesLeft = 16;
 var userLetter;
 var letterFound;
 
-var comPhrase;
+var comSubject;
 var audio = new Audio("");
 
-var phraseBank0 = [
-	"AJ Lee",
-	"AJ Styles",
-	"Asuka",
-	"Bayley",
-	"Becky Lynch",
-	"CM Punk",
-	"Daniel Bryan",
-	"Dean Ambrose",
-	"Dwayne 'The Rock' Johnson",
-	"Eddie Guerrero",
-	"Jason Jordan & Chad Gable",
-	"John Cena",
-	"Johnny Gargano & Tommaso Ciampa", 
-	"Kevin Owens",
-	"Kofi, Big E & Xavier Woods",
-	"Kurt Angle",
-	"Lita",
-	"Matt & Jeff Hardy",
-	"Naomi",
-	"Sami Zayn",
-	"Sasha Banks", 
-	"Shinsuke Nakamura",
-	"The Miz",
-	];
+const bankWWE = [
+	{
+		phrase:"AJ Lee",
+		audioHint:"assets/audio/Let's_Light_It_Up.mp3",
+		hintTitle:"Let's Light It Up"
+	},
 
-var phraseBank1 = [
-	"Luigi",
-	"Mario",
-	"Mushroom Kingdom",
-	"Peach's Castle",
+	{
+		phrase:"AJ Styles",
+		audioHint:"assets/audio/Phenomenal.mp3",
+		hintTitle:"Phenomenal"
+	},
 
-	"Congo Jungle",
-	"Donkey Kong",
+	{
+		phrase:"Asuka",
+		audioHint:"assets/audio/The_Future.mp3",
+		hintTitle:"The Future"
+	},
 
-	"Hyrule Castle",
-	"Link",
+	{
+		phrase:"Bayley",
+		audioHint:"assets/audio/Turn_it_Up.mp3",
+		hintTitle:"Turn it Up"
+	},
 
-	"Planet Zebes",
-	"Samus",
+	{
+		phrase:"Becky Lynch",
+		audioHint:"assets/audio/Celtic_Invasion.mp3",
+		hintTitle:"Celtic Invasion"
+	},
 
-	"Captain Falcon",
-	"Mute City",
+	{
+		phrase:"CM Punk",
+		audioHint:"assets/audio/Cult_of_Personality.mp3",
+		hintTitle:"Cult of Personality"
+	},
 
-	"Ness",
-	"Onett",
+	{
+		phrase:"Daniel Bryan",
+		audioHint:"assets/audio/Flight_of_the_Valkyries.mp3",
+		hintTitle:"Flight of the Valkyries"
+	},
 
-	"Yoshi",
-	"Yoshi's Island",
+	{
+		phrase:"Dean Ambrose",
+		audioHint:"assets/audio/Retaliation.mp3",
+		hintTitle:"Retaliation"
+	},
 
-	"Dream Land",
-	"Kirby",
+	{
+		phrase:"Dwayne 'The Rock' Johnson",
+		audioHint:"assets/audio/Electrifying.mp3",
+		hintTitle:"Electrifying"
+	},
 
-	"Fox",
-	"Sector Z",
+	{
+		phrase:"Eddie Guerrero",
+		audioHint:"assets/audio/Lie_Cheat_Steal.mp3",
+		hintTitle:"Lie, Cheat & Steal"
+	},
 
-	"Jigglypuff",
-	"Pikachu",
-	"Saffron City"	
-	];
+	{
+		phrase:"Jason Jordan & Chad Gable",
+		audioHint:"assets/audio/Elite.mp3",
+		hintTitle:"Elite"
+	},
+
+	{
+		phrase:"John Cena",
+		audioHint:"assets/audio/The_Time_is_Now.mp3",
+		hintTitle:"The Time is Now"
+	},
+
+	{
+		phrase:"Johnny Gargano & Tommaso Ciampa",
+		audioHint:"assets/audio/Chrome_Hearts.mp3",
+		hintTitle:"Chrome Hearts"
+	},
+
+	{
+		phrase:"Kevin Owens",
+		audioHint:"assets/audio/Fight.m4a",
+		hintTitle:"Fight"
+	},
+
+	{
+		phrase:"Kofi, Big E & Xavier Woods",
+		audioHint:"assets/audio/New_Way.mp3",
+		hintTitle:"New Way"
+	},
+
+	{
+		phrase:"Kurt Angle",
+		audioHint:"assets/audio/Medal.mp3",
+		hintTitle:"Medal"
+	},
+
+	{
+		phrase:"Lita",
+		audioHint:"assets/audio/LoveFuryPassionEnergy.mp3",
+		hintTitle:"LoveFuryPassionEnergy"
+	},
+
+	{
+		phrase:"Matt & Jeff Hardy",
+		audioHint:"assets/audio/Loaded.mp3",
+		hintTitle:"Loaded"
+	},
+
+	{
+		phrase:"Naomi",
+		audioHint:"assets/audio/Amazing_Remix.mp3",
+		hintTitle:"Amazing"
+	},
+
+	{
+		phrase:"Sami Zayn",
+		audioHint:"assets/audio/Worlds_Apart.m4a",
+		hintTitle:"Worlds Apart"
+	},
+
+	{
+		phrase:"Sasha Banks",
+		audioHint:"assets/audio/Sky's_the_Limit.m4a",
+		hintTitle:"Sky's the Limit"
+	},
+
+	{
+		phrase:"Shinsuke Nakamura",
+		audioHint:"assets/audio/Rising_Sun.mp3",
+		hintTitle:"Rising Sun"
+	},
+
+	{
+		phrase:"The Miz",
+		audioHint:"assets/audio/I_Came_to_Play.mp3",
+		hintTitle:"I Came to Play"
+	},
+]
+
+const bankSSB64 = [
+	{
+		phrase:"Luigi",
+		audioSuccess:"assets/audio/marioWin.mp3",
+	},
+
+	{
+		phrase:"Mario",
+		audioSuccess:"assets/audio/marioWin.mp3",
+	},
+
+	{
+		phrase:"Mushroom Kingdom",
+		audioSuccess:"assets/audio/marioWin.mp3",
+	},
+
+	{
+		phrase:"Peach's Castle",
+		audioSuccess:"assets/audio/marioWin.mp3",
+	},
+
+	{
+		phrase:"Congo Jungle",
+		audioSuccess:"assets/audio/dkWin.mp3",
+	},
+
+	{
+		phrase:"Donkey Kong",
+		audioSuccess:"assets/audio/dkWin.mp3",
+	},
+
+	{
+		phrase:"Hyrule Castle",
+		audioSuccess:"assets/audio/linkWin.mp3",
+	},
+
+	{
+		phrase:"Link",
+		audioSuccess:"assets/audio/linkWin.mp3",
+	},
+
+	{
+		phrase:"Planet Zebes",
+		audioSuccess:"assets/audio/samusWin.mp3",
+	},
+
+	{
+		phrase:"Samus",
+		audioSuccess:"assets/audio/samusWin.mp3",
+	},
+
+	{
+		phrase:"Captain Falcon",
+		audioSuccess:"assets/audio/captainFalconWin.mp3",
+	},
+
+	{
+		phrase:"Mute City",
+		audioSuccess:"assets/audio/captainFalconWin.mp3",
+	},
+
+	{
+		phrase:"Ness",
+		audioSuccess:"assets/audio/nessWin.mp3",
+	},
+
+	{
+		phrase:"Onett",
+		audioSuccess:"assets/audio/nessWin.mp3",
+	},
+
+	{
+		phrase:"Yoshi",
+		audioSuccess:"assets/audio/yoshiWin.mp3",
+	},
+
+	{
+		phrase:"Yoshi's Island",
+		audioSuccess:"assets/audio/yoshiWin.mp3",
+	},
+
+	{
+		phrase:"Dream Land",
+		audioSuccess:"assets/audio/kirbyWin.mp3",
+	},
+
+	{
+		phrase:"Kirby",
+		audioSuccess:"assets/audio/kirbyWin.mp3",
+	},
+
+	{
+		phrase:"Fox",
+		audioSuccess:"assets/audio/foxWin.mp3",
+	},
+
+	{
+		phrase:"Sector Z",
+		audioSuccess:"assets/audio/foxWin.mp3",
+	},
+
+	{
+		phrase:"Jigglypuff",
+		audioSuccess:"assets/audio/pokemonWin.mp3",
+	},
+
+	{
+		phrase:"Pikachu",
+		audioSuccess:"assets/audio/pokemonWin.mp3",
+	},
+
+	{
+		phrase:"Saffron City",
+		audioSuccess:"assets/audio/pokemonWin.mp3",
+	},
+]
+
+const calculateGuesses = bankObj => {
+
+	const minGuess = 6;
+	let guesses = 16 - bankObj.phrase.length;
+
+	if(guesses < minGuess) {
+		guesses = minGuess;
+	}
+
+	bankObj.guesses = guesses;
+
+	return
+
+}
 
 startGame(currentTheme);
-
 
 
 document.onkeyup = function(event) {
@@ -104,9 +314,9 @@ document.onkeyup = function(event) {
 		userGuesses.push(userLetter);
 		letterFound = false;
 
-		for (var i = 0; i < comPhrase.length; i++) {
-	 		if (userLetter === comPhrase[i] || userLetter.toUpperCase() === comPhrase[i]) {
-	 			displayPhraseArr[i] = comPhrase[i];
+		for (var i = 0; i < comSubject.phrase.length; i++) {
+	 		if (userLetter === comSubject.phrase[i] || userLetter.toUpperCase() === comSubject.phrase[i]) {
+	 			displayPhraseArr[i] = comSubject.phrase[i];
 	 			letterFound = true;
 	  		}
 	 	}
@@ -119,10 +329,13 @@ document.onkeyup = function(event) {
 	 	updateDisplay();
 
 	 	// You are sucessful
-	 	if (comPhrase === displayPhraseArr.join("")) {
+	 	if (comSubject.phrase === displayPhraseArr.join("")) {
 	 		winNum++;
-	 		if (currentTheme === "SSB64") {
-	 			playSuccessAudio (comPhrase);
+	 		if (comSubject.audioSuccess) {
+	 			audio.pause();
+	 			audio = new Audio(comSubject.audioSuccess);
+				audio.play();
+				audio.loop = false;
 	 		}
 	 		startGame(currentTheme);
 	 	}
@@ -146,8 +359,8 @@ function startGame (thm) {
 		var img2 = document.getElementById("logo2");
 		img2.src = "assets/images/WWELogo2.gif";
 
-		rand = Math.floor((Math.random()*phraseBank0.length));
-		var newComPhrase = phraseBank0[rand];
+		rand = Math.floor((Math.random()*bankWWE.length));
+		var newComSubject = bankWWE[rand];
 	}
 
 	else if (thm === "SSB64") {
@@ -157,30 +370,43 @@ function startGame (thm) {
 		var img2 = document.getElementById("logo2");
 		img2.src = "assets/images/N64Logo.gif";
 
-		rand = Math.floor((Math.random()*phraseBank1.length));
-		var newComPhrase = phraseBank1[rand];
+		rand = Math.floor((Math.random()*bankSSB64.length));
+		var newComSubject = bankSSB64[rand];
 	}
 
 	// Checks for repeat phrases
-	if( newComPhrase != comPhrase ) {
+	if( newComSubject !== comSubject ) {
 
-		comPhrase = newComPhrase;
+		comSubject = newComSubject;
+		comSubject.phrase = comSubject.phrase;
 		userGuesses = [];
-		guessesLeft = maxGuess;
 
-		if (thm === "WWE"){
-			playAudioHint(comPhrase);
+		if(!comSubject.guesses) {
+			calculateGuesses(comSubject);
 		}
 
-		else if (thm === "SSB64") {
+		guessesLeft = comSubject.guesses;
+
+		if (comSubject.audioHint){
+			audio.pause();
+			audio = new Audio(comSubject.audioHint);
+			audio.play();
+			audio.loop = true;
+		}
+
+		if (comSubject.hintTitle) {
+			document.getElementById("hintTitle").textContent = comSubject.hintTitle;
+		}
+
+		else {
 			document.getElementById("hintTitle").textContent = "";
 		}
 
 		// Creates starting display for user
 		displayPhraseArr = [];
-		for (var i = 0; i < comPhrase.length; i++) {
-			if( alphabet.indexOf(comPhrase[i]) == -1 ) {
-				displayPhraseArr.push(comPhrase[i]);
+		for (var i = 0; i < comSubject.phrase.length; i++) {
+			if( alphabet.indexOf(comSubject.phrase[i]) === -1 ) {
+				displayPhraseArr.push(comSubject.phrase[i]);
 			}
 
 			else {	
@@ -224,210 +450,6 @@ function repeatGuess () {
 	}
 
 	return false;
-}
-
-// Plays Audio depending on phrase
-function playAudioHint (phr) {
-
-	var hintTitle;
-	audio.pause();
-
-	if (phr === "AJ Lee") {
-		hintTitle = "Let's Light It Up"
-		audio = new Audio("assets/audio/Let's_Light_It_Up.mp3");
-		audio.play();
-	}
-
-	else if (phr === "AJ Styles") {
-		hintTitle = "Phenomenal"
-		audio = new Audio("assets/audio/Phenomenal.mp3");
-		audio.play();
-	}
-
-	else if (phr === "Asuka") {
-		hintTitle = "The Future"
-		audio = new Audio("assets/audio/The_Future.mp3");
-		audio.play();
-	}
-
-	else if (phr === "Bayley") {
-		hintTitle = "Turn it Up"
-		audio = new Audio("assets/audio/Turn_it_Up.mp3");
-		audio.play();
-	}
-
-	else if (phr === "Becky Lynch") {
-		hintTitle = "Celtic Invasion"
-		audio = new Audio("assets/audio/Celtic_Invasion.mp3");
-		audio.play();
-	}
-
-	else if (phr === "CM Punk") {
-		hintTitle = "Cult of Personality"
-		audio = new Audio("assets/audio/Cult_of_Personality.mp3");
-		audio.play();
-	}
-
-	else if (phr === "Daniel Bryan") {
-		hintTitle = "Flight of the Valkyries"
-		audio = new Audio("assets/audio/Flight_of_the_Valkyries.mp3");
-		audio.play();
-	}
-
-	else if (phr === "Dean Ambrose") {
-		hintTitle = "Retaliation"
-		audio = new Audio("assets/audio/Retaliation.mp3");
-		audio.play();
-	}
-
-	else if (phr === "Dwayne 'The Rock' Johnson") {
-		hintTitle = "Electrifying"
-		audio = new Audio("assets/audio/Electrifying.mp3");
-		audio.play();
-	}
-
-	else if (phr === "Eddie Guerrero") {
-		hintTitle = "Lie, Cheat & Steal"
-		audio = new Audio("assets/audio/Lie_Cheat_Steal.mp3");
-		audio.play();
-	}
-
-	else if (phr === "Jason Jordan & Chad Gable") {
-		hintTitle = "Elite"
-		audio = new Audio("assets/audio/Elite.mp3");
-		audio.play();
-	}
-
-	else if (phr === "John Cena") {
-		hintTitle = "The Time is Now"
-		audio = new Audio("assets/audio/The_Time_is_Now.mp3");
-		audio.play();
-	}
-
-	else if (phr === "Johnny Gargano & Tommaso Ciampa") {
-		hintTitle = "Chrome Hearts"
-		audio = new Audio("assets/audio/Chrome_Hearts.mp3");
-		audio.play();
-	}
-
-	else if (phr === "Kevin Owens") {
-		hintTitle = "Fight"
-		audio = new Audio("assets/audio/Fight.m4a");
-		audio.play();
-	}
-
-	else if (phr === "Kofi, Big E & Xavier Woods") {
-		hintTitle = "New Way"
-		audio = new Audio("assets/audio/New_Way.mp3");
-		audio.play();
-	}
-
-	else if (phr === "Kurt Angle") {
-		hintTitle = "Medal"
-		audio = new Audio("assets/audio/Medal.mp3");
-		audio.play();
-	}
-
-	else if (phr === "Lita") {
-		hintTitle = "LoveFuryPassionEnergy"
-		audio = new Audio("assets/audio/LoveFuryPassionEnergy.mp3");
-		audio.play();
-	}
-
-	else if (phr === "Matt & Jeff Hardy") {
-		hintTitle = "Loaded"
-		audio = new Audio("assets/audio/Loaded.mp3");
-		audio.play();
-	}
-
-	else if (phr === "Naomi") {
-		hintTitle = "Amazing"
-		audio = new Audio("assets/audio/Amazing_Remix.mp3");
-		audio.play();
-	}
-
-	else if (phr === "Sami Zayn") {
-		hintTitle = "Worlds Apart"
-		audio = new Audio("assets/audio/Worlds_Apart.m4a");
-		audio.play();
-	}
-
-	else if (phr === "Sasha Banks") {
-		hintTitle = "Sky's the Limit"
-		audio = new Audio("assets/audio/Sky's_the_Limit.m4a");
-		audio.play();
-	}
-
-	else if (phr === "Shinsuke Nakamura") {
-		hintTitle = "Rising Sun"
-		audio = new Audio("assets/audio/Rising_Sun.mp3");
-		audio.play();
-	}
-
-	else if (phr === "The Miz") {
-		hintTitle = "I Came to Play"
-		audio = new Audio("assets/audio/I_Came_to_Play.mp3");
-		audio.play();
-	}
-
-	audio.loop = true;
-	document.getElementById("hintTitle").textContent = hintTitle;
-}
-
-function playSuccessAudio (phr) {
-	audio.pause();
-
-	if( phr === "Luigi" || phr === "Mario" || phr === "Mushroom Kingdom" || phr === "Peach's Castle") {
-		audio = new Audio("assets/audio/marioWin.mp3");
-		audio.play();
-	}
-
-	else if( phr === "Congo Jungle" || phr === "Donkey Kong" ) {
-		audio = new Audio("assets/audio/dkWin.mp3");
-		audio.play();
-	}
-
-	else if( phr === "Hyrule Castle" || phr === "Link" ) {
-		audio = new Audio("assets/audio/linkWin.mp3");
-		audio.play();
-	}
-
-	else if( phr === "Planet Zebes" || phr === "Samus" ) {
-		audio = new Audio("assets/audio/samusWin.mp3");
-		audio.play();
-	}
-
-	else if( phr === "Captain Falcon" || phr === "Mute City" ) {
-		audio = new Audio("assets/audio/captainFalconWin.mp3");
-		audio.play();
-	}
-
-	else if( phr === "Ness" || phr === "Onett" ) {
-		audio = new Audio("assets/audio/nessWin.mp3");
-		audio.play();
-	}
-
-	else if( phr === "Yoshi" || phr === "Yoshi's Island" ) {
-		audio = new Audio("assets/audio/yoshiWin.mp3");
-		audio.play();
-	}
-
-	else if( phr === "Dream Land" || phr === "Kirby" ) {
-		audio = new Audio("assets/audio/kirbyWin.mp3");
-		audio.play();
-	}
-
-	else if( phr === "Fox" || phr === "Sector Z" ) {
-		audio = new Audio("assets/audio/foxWin.mp3");
-		audio.play();
-	}
-
-	else if( phr === "Pikachu" || phr === "Jigglypuff" || phr === "Saffron City" ) {
-		audio = new Audio("assets/audio/pokemonWin.mp3");
-		audio.play();
-	}
-
-	audio.loop = false;
 }
 
 // Switches theme
